@@ -120,7 +120,7 @@ class UniversalHDFire : Inventory
 }
 
 // The following code is taken from BulletZ by dawnbreez at ZDF
-// It has been modified for HideousUniversal.pk3 by Joshua Hard
+// It has been modified for Universal Destructor by Joshua Hard
 class UniversalHDPuff : BulletPuff replaces BulletPuff
 {
 	double map(double val, double min1, double max1, double min2, double max2)
