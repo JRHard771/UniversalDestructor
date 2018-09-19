@@ -1,0 +1,11 @@
+// Screw DECORATE and its bad habit of overriding ZScript.
+
+// DoomRL Arsenal Monster compatibility
+actor UHDPuffDoomRL : UniversalHDPuff replaces RLEnemyBulletPuff {}
+actor UHDPuffDoomRL2 : UniversalHDPuff replaces RLEnemySummonBulletPuff {}
+actor UHDPuffDoomRL3 : UniversalHDPuff replaces RLEnemyMeleeWeaponPuff {}
+actor UHDPuffDoomRL4 : UniversalHDPuff replaces RLEnemyBulletPuffNoInfight {}
+actor UHDPuffDoomRL5 : UniversalHDPuff replaces RLEnemyBulletPuffNoInfightGib {}
+actor UHDPuffDoomRL6 : UniversalHDPuff replaces RLEnemyBulletPuffGib {}
+actor UHDPuffDoomRL7 : UniversalHDPuff replaces RLSpiderMastermindBulletPuff {}
+actor UHDPuffDoomRL8 : UniversalHDPuff replaces RLEnemyPiercingPuff {}

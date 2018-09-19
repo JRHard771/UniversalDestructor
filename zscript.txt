@@ -1,0 +1,191 @@
+version "3.3"
+
+class UniversalHDHandler : EventHandler
+{
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		if (e.Thing)
+		{
+			if (e.Thing.bIsMonster)
+				e.Thing.GiveInventory("UniversalHDMonsterBuff", 1);
+			else if (e.Thing.bMissile)
+			{
+				string dt = e.Thing.damagetype;
+				dt.ToLower();
+				if
+				(
+					dt.indexOf("fire") >= 0 ||
+					e.Thing is "DoomImpBall" ||
+					e.Thing is "BaronBall" ||
+					e.Thing is "FatShot"
+				)
+				{
+					e.Thing.damagetype = 'thermal';
+					e.Thing.giveInventory('UniversalHDFire', 1);
+				}
+				else if
+				(
+					dt.indexOf("plasma") >= 0 ||
+					dt.indexOf("lightning") >= 0 ||
+					e.Thing is "CacodemonBall" ||
+					e.Thing is "PlasmaBall"
+				)
+				{
+					e.Thing.damagetype = 'electro';
+				}
+			}
+		}
+	}
+}
+
+class UniversalHDMonsterBuff : Inventory
+{
+	double map(double val, double min1, double max1, double min2, double max2)
+	{
+		double ratio = (val - min1) / (max1 - min1);
+		return ratio * (max2 - min2) + min2;
+	}
+	
+	double ExpCurve(double val, double min1, double max1, double min2, double max2)
+	{
+		double linear = map(val, min1, max1, min2, max2);
+		return map(val, min1, max1, min2, linear);
+	}
+	
+	double LogCurve(double val, double min1, double max1, double min2, double max2)
+	{
+		double linear = map(val, min1, max1, min2, max2);
+		return map(val, min1, max1, linear, max2);
+	}
+
+	override void ModifyDamage(int damage, Name damageType, out int newdamage, bool passive)
+	{
+		if (damage > 0)
+		{
+			if (passive && owner)
+			{
+				if (owner.GetSpawnHealth() < 1000)
+					newdamage = damage * LogCurve(owner.GetSpawnHealth(), 20, 1000, 1.0 / sv_HDUmonsterResistance, 1.0);
+				else
+					newdamage = damage;
+			}
+			else
+			{
+				if (damage < 50)
+					newdamage = LogCurve(damage, 5, 50, 5 * sv_HDUmonsterDamage, 50);
+				else
+					newdamage = damage;
+			}
+		}
+	}
+}
+
+class UniversalHDFire : Inventory
+{
+	void UniversalImmolate(
+		actor victim,
+		actor perpetrator,
+		int duration=0
+	){
+		if(!victim
+			||(
+				perpetrator&&
+				perpetrator.bdontharmspecies&&
+				perpetrator.getspecies()==victim.getspecies()
+			)
+		){
+			victim=spawn("PersistentDamager",self.pos);
+			victim.target=perpetrator;
+		}
+		actor f=victim.spawn("HDFire",victim.pos);
+		f.target=victim;f.master=perpetrator;
+		if(duration<1) f.stamina=random(40,80);
+		else f.stamina=duration;
+		if(victim is "PlayerPawn")f.changetid(-7677);
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		if (owner && !owner.bMissile)
+		{
+			actor victim = owner.blockingmobj;
+			actor perp = owner.target;
+			if (victim)
+				UniversalImmolate(victim,perp,random(10,32));
+			owner.removeInventory(self);
+			destroy();
+		}
+	}
+}
+
+// The following code is taken from BulletZ by dawnbreez at ZDF
+// It has been modified for HideousUniversal.pk3 by Joshua Hard
+class UniversalHDPuff : BulletPuff replaces BulletPuff
+{
+	double map(double val, double min1, double max1, double min2, double max2)
+	{
+		double ratio = (val - min1) / (max1 - min1);
+		return ratio * (max2 - min2) + min2;
+	}
+	Default
+	{
+		+NODECAL;
+		+PUFFONACTORS;
+		+ALLOWTHRUFLAGS;
+		+THRUACTORS;
+		+ALWAYSPUFF;
+		+PUFFGETSOWNER;
+		+NOBLOOD;
+		+BLOODLESSIMPACT;
+		+SKYEXPLODE;
+		+BOUNCEONWALLS;
+		+USEBOUNCESTATE;
+		-BLOODSPLATTER;
+		-ALLOWPARTICLES;
+		-RANDOMIZE;
+		BounceType "Doom";
+		VSpeed 0;
+		DamageType "DummyDamage";
+	}
+	States
+	{
+	Spawn:
+	Melee:
+	Death:
+	XDeath:	
+	Death.Sky:
+	Bounce.Wall:
+		PUFF A 1 Bright NoDelay
+		{
+			let bullet = target.Spawn("HDBullet9",target.pos+(0,0,target.height * 0.9));
+			
+			//Randomly scale the bullet between 9mm, 4.26mm, and 7.76 values
+			double bulletRandom = frandom(0,2);
+			if (bulletRandom < 1)
+			{
+				bullet.mass = map(bulletRandom, 0, 1, 1539, 320);
+				bullet.speed = map(bulletRandom, 0, 1, 420, 1200);
+				bullet.woundhealth = map(bulletRandom, 0, 1, 3, 18);
+				bullet.accuracy = map(bulletRandom, 0, 1, 4, 6);
+			}
+			else
+			{
+				bullet.mass = map(bulletRandom, 0, 1, 320, 1344);
+				bullet.speed = map(bulletRandom, 0, 1, 1200, 1100);
+				bullet.woundhealth = map(bulletRandom, 0, 1, 18, 16);
+				bullet.accuracy = map(bulletRandom, 0, 1, 6, 12);
+			}
+			
+			bullet.target=target;
+			bullet.angle=
+				VectorAngle(pos.x - target.pos.x,
+							pos.y - target.pos.y);
+			bullet.pitch=
+				-VectorAngle(target.Distance2D(target.target),
+							(pos.z - (target.pos.z + target.height - 6)));
+			bullet.vel+=target.vel;
+		}
+		Stop;
+	}
+}
