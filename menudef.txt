@@ -1,0 +1,11 @@
+AddOptionMenu "OptionsMenu"
+{
+	Submenu "Universal Destructor Options", "UniDesOptions"
+}
+
+OptionMenu "UniDesOptions"
+{
+	Title "Universal Destructor"
+	Slider "Monster Damage Resistance", "sv_HDUmonsterResistance", 1.0, 10.0, 0.25, 2
+	Slider "Monster Damage Multiplier", "sv_HDUmonsterDamage", 1.0, 10.0, 0.25, 2
+}
