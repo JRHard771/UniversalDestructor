@@ -1,2 +1,2 @@
-server float sv_HDUmonsterResistance = 3.0;
-server float sv_HDUmonsterDamage = 3.0;
+server float sv_HDUmonsterResistance = 4.0;
+server float sv_HDUmonsterDamage = 1.0;

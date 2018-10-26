@@ -2,6 +2,24 @@ version "3.3"
 
 class UniversalHDHandler : EventHandler
 {
+	bool IsHDMonster(Actor a)
+	{
+		return ((Archfiend(a) || ArchAngel(a) || Babuin(a) || SpecBabuin(a) ||
+		HellPrince(a) || HellKnave(a) || HDFireCan(a) || HDBarrel(a) ||
+		Cacademon(a) || SatanRobo(a) || DerpBot(a) || EnemyDerp(a) ||
+		DragonGuard(a) || HerpBot(a) || EnemyHERP(a) || FighterImp(a) ||
+		HealerImp(a) || MageImp(a) || Condemned(a) || Mancubus(a) ||
+		HDMarine(a) || Rifleman(a) || Infiltrator(a) || Enforcer(a) ||
+		Rocketeer(a) || RifleTango(a) || SMGTango(a) || ShotTango(a) ||
+		RocketTango(a) || UndeadRifleman(a) || GhostMarine(a) ||
+		HoopBubble(a) || Putto(a) || Boner(a) || Jackboot(a) ||
+		JackandJillboot(a) || UndeadJackbootman(a) || NinjaPirate(a) ||
+		ShellShade(a) || SpiderDemon(a) || Yokai(a) ||
+		ZombieStormtrooper(a) || ZombieAutoStormtrooper(a) ||
+		ZombieSemiStormtrooper(a) || ZombieSMGStormtrooper(a) ||
+		Jailer(a) || Krangling(a)));
+	}
+
 	override void WorldThingSpawned(WorldEvent e)
 	{
 		if (e.Thing)
