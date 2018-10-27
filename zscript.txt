@@ -22,7 +22,7 @@ class UniversalHDHandler : EventHandler
 
 	override void WorldThingSpawned(WorldEvent e)
 	{
-		if (e.Thing)
+		if (e.Thing && !IsHDMonster(e.Thing))
 		{
 			if (e.Thing.bIsMonster)
 				e.Thing.GiveInventory("UniversalHDMonsterBuff", 1);
