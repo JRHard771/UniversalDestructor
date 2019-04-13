@@ -200,7 +200,7 @@ class UniversalHDPuff : BulletPuff replaces BulletPuff
 				VectorAngle(pos.x - target.pos.x,
 							pos.y - target.pos.y);
 			bullet.pitch=
-				-VectorAngle(target.Distance2D(target.target),
+				-VectorAngle(target.Distance2D(self),
 							(pos.z - (target.pos.z + target.height - 6)));
 			bullet.vel+=target.vel;
 		}
