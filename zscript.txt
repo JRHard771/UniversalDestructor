@@ -7,7 +7,7 @@ class UniversalHDHandler : EventHandler
 		return ((Archfiend(a) || ArchAngel(a) || Babuin(a) || SpecBabuin(a) ||
 		HellPrince(a) || HellKnave(a) || HDFireCan(a) || HDBarrel(a) ||
 		FooFighter(a) || SatanRobo(a) || DerpBot(a) || EnemyDerp(a) ||
-		RedPillbox(a) || HerpBot(a) || EnemyHERP(a) || FighterImp(a) ||
+		VulcanetteGuy(a) || HerpBot(a) || EnemyHERP(a) || FighterImp(a) ||
 		HealerImp(a) || MageImp(a) || Condemned(a) || Mancubus(a) ||
 		HDMarine(a) || Rifleman(a) || Infiltrator(a) || Enforcer(a) ||
 		Rocketeer(a) || RifleTango(a) || SMGTango(a) || ShotTango(a) ||
