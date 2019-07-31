@@ -8,7 +8,7 @@ class UniversalHDHandler : EventHandler
 		PainLord(a) || PainBringer(a) || HDFireCan(a) || HDBarrel(a) ||
 		FooFighter(a) || SatanRobo(a) || DerpBot(a) || EnemyDerp(a) ||
 		VulcanetteGuy(a) || HerpBot(a) || EnemyHERP(a) || Serpentipede(a) ||
-		Regentipede(a) || Ardentipede(a) || Begotten(a) || CombatSlug(a) ||
+		Regentipede(a) || Ardentipede(a) || FlyingSkull(a) || CombatSlug(a) ||
 		HDMarine(a) || Rifleman(a) || Infiltrator(a) || Enforcer(a) ||
 		Rocketeer(a) || RifleTango(a) || SMGTango(a) || ShotTango(a) ||
 		RocketTango(a) || UndeadRifleman(a) || GhostMarine(a) ||
@@ -17,7 +17,7 @@ class UniversalHDHandler : EventHandler
 		ShellShade(a) || Technorantula(a) || Yokai(a) ||
 		ZombieStormtrooper(a) || ZombieAutoStormtrooper(a) ||
 		ZombieSemiStormtrooper(a) || ZombieSMGStormtrooper(a) ||
-		HivePit(a) || TechnoSpider(a)));
+		SkullSpitter(a) || TechnoSpider(a)));
 	}
 
 	override void WorldThingSpawned(WorldEvent e)
