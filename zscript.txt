@@ -4,20 +4,20 @@ class UniversalHDHandler : EventHandler
 {
 	bool IsHDMonster(Actor a)
 	{
-		return ((Archfiend(a) || ArchAngel(a) || Babuin(a) || SpecBabuin(a) ||
-		HellPrince(a) || HellKnave(a) || HDFireCan(a) || HDBarrel(a) ||
+		return ((FlameBringer(a) || LightBearer(a) || Babuin(a) || SpecBabuin(a) ||
+		PainLord(a) || PainBringer(a) || HDFireCan(a) || HDBarrel(a) ||
 		FooFighter(a) || SatanRobo(a) || DerpBot(a) || EnemyDerp(a) ||
-		VulcanetteGuy(a) || HerpBot(a) || EnemyHERP(a) || FighterImp(a) ||
-		HealerImp(a) || MageImp(a) || Condemned(a) || Mancubus(a) ||
+		VulcanetteGuy(a) || HerpBot(a) || EnemyHERP(a) || Serpentipede(a) ||
+		Regentipede(a) || Ardentipede(a) || FlyingSkull(a) || CombatSlug(a) ||
 		HDMarine(a) || Rifleman(a) || Infiltrator(a) || Enforcer(a) ||
 		Rocketeer(a) || RifleTango(a) || SMGTango(a) || ShotTango(a) ||
 		RocketTango(a) || UndeadRifleman(a) || GhostMarine(a) ||
 		HoopBubble(a) || Putto(a) || Boner(a) || Jackboot(a) ||
 		JackandJillboot(a) || UndeadJackbootman(a) || NinjaPirate(a) ||
-		ShellShade(a) || SpiderDemon(a) || Yokai(a) ||
+		ShellShade(a) || Technorantula(a) || Yokai(a) ||
 		ZombieStormtrooper(a) || ZombieAutoStormtrooper(a) ||
 		ZombieSemiStormtrooper(a) || ZombieSMGStormtrooper(a) ||
-		Jailer(a) || Krangling(a)));
+		SkullSpitter(a) || TechnoSpider(a)));
 	}
 
 	override void WorldThingSpawned(WorldEvent e)
